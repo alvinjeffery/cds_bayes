@@ -59,7 +59,9 @@ def make_diff(Mx_list, simple_output=True):
                 else: 
                     score = score * m
                     Dx_list.loc[i,'Importance_List'].append(float(im))
-            else: print("Mx ", mx, "is not positive or negative. Please indicate presence or absence of mx.")
+            else: 
+                #print("Mx ", mx, "is not positive or negative. Please indicate presence or absence of mx.")
+                return "Mx " + str(mx) +  " is not positive or negative. Please indicate presence or absence of mx."
         if not Dx_list.loc[i,'Importance_List']: 
             Dx_list.loc[i, 'Score'] = 0
         else:
@@ -91,16 +93,19 @@ class BayesGUI:
         self.label = Label(master, text="Enter manifestations below with\n\
         positive findings preceded by a plus sign (+)\n\
         and pertinent negative findings preceded by a minus sign (-).")
+        self.label.config(font=("Courier", 24))
         self.label.pack()
 
         # text entry box
         self.txt = Entry(master, width=150)
+        self.txt.config(font=("Courier", 24))
         self.txt.pack()
 
         # execute core functionality
         self.greet_button = Button(master, 
                                    text="$Provide Differential Diagnosis List", 
                                    command=self.rank_order)
+                                   
         self.greet_button.pack()
 
         # display differential list
@@ -108,6 +113,7 @@ class BayesGUI:
         self.differential_list_text = StringVar()
         self.differential_list_text.set(self.diagnoses)
         self.differential_list = Label(master, textvariable=self.differential_list_text)
+        self.differential_list.config(font=("Courier", 24))
         self.differential_list.pack()
 
         # quit program
