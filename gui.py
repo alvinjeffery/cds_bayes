@@ -3,7 +3,7 @@ import re
 import pandas as pd
 
 # read data from file
-df = pd.read_csv('LikelihoodRatiosDataFrame_GLR/DxMxLR.csv', index_col=0)
+df = pd.read_csv('DxMxLR.csv', index_col=0)
 
 def parse(txt):
     """
