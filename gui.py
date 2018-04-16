@@ -2,6 +2,11 @@ from tkinter import Tk, Label, Button, Entry, StringVar, IntVar, END, W, E
 import re
 import pandas as pd
 
+# Global variables 
+FONT_SIZE = 24 # affects all non-button text
+KEEP_OUTPUT_SIMPLE = False # make False if wanting to see all details
+
+
 # read data from file
 df = pd.read_csv('DxMxLR.csv', index_col=0)
 
@@ -20,7 +25,7 @@ def parse(txt):
         return "Unable to parse."
 
 
-def make_diff(Mx_list, simple_output=True):
+def make_diff(Mx_list, simple_output=KEEP_OUTPUT_SIMPLE):
     """
     Creates differential diagnosis list, ranked in descending order of post-test probability.
     Originally authored by Sarah
@@ -70,8 +75,18 @@ def make_diff(Mx_list, simple_output=True):
             Dx_list.loc[i, 'Score'] = 0
         else:
             Dx_list.loc[i, 'Score'] = float(score)
-
-    Dx_list = Dx_list.sort_values(by="Score", ascending= False)
+    
+    prev = []
+    for d in set(df['Dx Name']):
+        for i,r in df.iterrows():
+            if r['Dx Name'] == d:
+                prev.append(float(r['Prevalence']))
+                break
+    #print(prev)
+    Dx_list['Prev'] = pd.Series(prev)
+    Dx_list
+    Dx_list['Final_score'] = Dx_list['Score']*Dx_list['Prev']
+    Dx_list = Dx_list.sort_values(by="Final_score", ascending= False)
 
     rank = 1
     for i,r in Dx_list.iterrows():
@@ -97,12 +112,12 @@ class BayesGUI:
         self.label = Label(master, text="Enter manifestations below with\n\
         positive findings preceded by a plus sign (+)\n\
         and pertinent negative findings preceded by a minus sign (-).")
-        self.label.config(font=("Courier", 24))
+        self.label.config(font=("Courier", FONT_SIZE))
         self.label.pack()
 
         # text entry box
         self.txt = Entry(master, width=150)
-        self.txt.config(font=("Courier", 24))
+        self.txt.config(font=("Courier", FONT_SIZE))
         self.txt.pack()
 
         # execute core functionality
@@ -117,7 +132,7 @@ class BayesGUI:
         self.differential_list_text = StringVar()
         self.differential_list_text.set(self.diagnoses)
         self.differential_list = Label(master, textvariable=self.differential_list_text)
-        self.differential_list.config(font=("Courier", 24))
+        self.differential_list.config(font=("Courier", FONT_SIZE))
         self.differential_list.pack()
 
         # quit program
