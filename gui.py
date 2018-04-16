@@ -42,6 +42,8 @@ def make_diff(Mx_list, simple_output=True):
                 q = df.loc[df['Dx Name'] == r['Dx']]
                 q = q.loc[df['Mx Name'] == mx]
                 im = q['Import'].values
+                if im > 4:
+                    Dx_list.loc[i, 'Dx'] = str(Dx_list.loc[i, 'Dx'] + '*')
                 p = q['LR (+)'].values
                 #print(p)
                 if p.size == 0: continue #don't count NAs
@@ -53,6 +55,8 @@ def make_diff(Mx_list, simple_output=True):
                 s = df.loc[df['Dx Name'] == r['Dx']]
                 s = s.loc[df['Mx Name'] == mx]
                 im = s['Import'].values
+                #if im > 4:
+                #    Dx_list.loc[i, 'Dx'] = str(Dx_list.loc[i, 'Dx'] + '*')
                 m = s['LR (-)'].values
                 #print(m)
                 if m.size == 0: continue #don't count NAs
