@@ -1,5 +1,5 @@
 #!/bin/bash 
-
+# awk script that removes LINK row for all diseases
 
 cd /Users/abin-personal/Google\ Drive/1_MSTP/2_Research/1_CapraLab/courses/BMIF6315/assignments/clinical_decision_support/clin_decis_support_assignment
 
