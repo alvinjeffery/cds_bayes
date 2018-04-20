@@ -8,7 +8,8 @@ KEEP_OUTPUT_SIMPLE = False # make False if wanting to see all details
 
 
 # read data from file
-df = pd.read_csv('DxMxLR.csv', index_col=0)
+#df = pd.read_csv('DxMxLR.csv', index_col=0)
+df = pd.read_csv('df_bayes.csv', index_col=0)
 
 def parse(txt):
     """
