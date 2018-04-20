@@ -3,6 +3,8 @@
 
 This class project entailed rank ordering and scoring of diseases based on negative and positive findings.  
 
+**Disclaimer:** This tool should not be used for actual clinical reasoning.  
+
 ### References
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4665459/ - apply bayes to single test; maybe explains how to combine multiple tests (AA) 
