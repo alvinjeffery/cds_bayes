@@ -8,7 +8,6 @@ KEEP_OUTPUT_SIMPLE = False # make False if wanting to see all details
 
 
 # read data from file
-#df = pd.read_csv('DxMxLR.csv', index_col=0)
 df = pd.read_csv('df_bayes.csv', index_col=0)
 
 def parse(txt):
@@ -94,6 +93,8 @@ def make_diff(Mx_list, simple_output=KEEP_OUTPUT_SIMPLE):
         Dx_list.loc[i, 'Rank'] = rank
         rank = rank + 1
     Dx_list.set_index('Rank', inplace=True)
+    
+    Dx_list = Dx_list[['Dx', 'Final_score']]
     
     # for production, only list diagnoses (i.e., not scores & other info used in testing)
     if simple_output:

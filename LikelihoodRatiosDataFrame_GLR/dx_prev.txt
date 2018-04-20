@@ -1,2 +1,0 @@
-id	prev	name
-114	3	choledocholithiasis362	5	peptic ulcer441	2	pyloric obstruction187	3	gastric carcinoma189	2	gastritis giant hypertrophic alias menetriers_disease351	4	pancreatitis acute352	3	pancreatitis chronic188	2	gastric lymphoma192	2	gastrointestinal sarcoidosis616	1	anisakiasis
